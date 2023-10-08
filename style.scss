@@ -1,0 +1,33 @@
+.container {
+  width: 60vw;
+  height: 80vh;
+  margin: 0 auto;
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(23%, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(23%, 1fr));
+  gap: 3px;
+}
+
+.card {
+  box-sizing: border-box;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.pairClosed {
+  // background-color: aqua;
+  // visibility: hidden;
+  filter: sepia(100%) saturate(200%) brightness(70%) hue-rotate(330deg);
+}
+
+@media (min-width: 320px) and (max-width: 900px) {
+  .container {
+    width: 95vw;
+  }
+}
