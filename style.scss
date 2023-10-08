@@ -21,14 +21,15 @@
   transform-style: preserve-3d;
   transition: 0.4s ease-in-out;
 }
+.card:hover {
+  
+}
 
 .cardAnimated{
   transform: rotateY(180deg);
 }
 
 .pairClosed {
-  // background-color: aqua;
-  // visibility: hidden;
   filter: sepia(100%) saturate(200%) brightness(70%) hue-rotate(330deg);
 }
 

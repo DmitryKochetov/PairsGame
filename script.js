@@ -42,25 +42,29 @@ let firstOfPairID = -1;
 let secondOfPairID = -1;
 let openedCardsCounter = 0;
 let memoCards = [];
+let uniqueId = -1;
 
 for (let index = 0; index < 16; index++) {
   el = document.createElement("div");
   cont.append(el);
-
-  memoCards.push(el);
+  el.idCard = index;
   el.className = "card";
   el.addEventListener(`click`, cardClickHandler);
+  memoCards.push(el);
 
   function cardClickHandler(event) {
     if (!event.target.matched) {
-      event.target.classList.add(`cardAnimated`);
       
+
       if (!event.target.cardOpened) {
+        event.target.classList.add(`cardAnimated`);
         if (openedCardsCounter >= 2) {
           for (let i = 0; i < 16; i++) {
-
-            memoCards[i].style.backgroundImage = `none`;
-            memoCards[i].cardOpened = false;
+            if (!memoCards[i].matched) {
+              memoCards[i].style.backgroundImage = `none`;
+              memoCards[i].cardOpened = false;
+              memoCards[i].classList.remove("cardAnimated");
+            }
           }
           firstOfPairID = -1;
           secondOfPairID = -1;
@@ -72,24 +76,24 @@ for (let index = 0; index < 16; index++) {
         event.target.cardOpened = true;
         openedCardsCounter++;
         event.target.cardID = cards[index].id;
-        if (cards[index].id === firstOfPairID) {
-          console.log(`win`);
-         
-          for (let i = 0; i < 16; i++) {
+        if ((cards[index].id === firstOfPairID) && (uniqueId != event.target.idCard)) {
+          // console.log(`win`);
 
+          for (let i = 0; i < 16; i++) {
             if (memoCards[i].cardID == firstOfPairID) {
               memoCards[i].removeEventListener(`click`, cardClickHandler);
               memoCards[i].classList.add(`pairClosed`);
               memoCards[i].matched = true;
             }
           }
+          firstOfPairID = -1;
         }
         firstOfPairID = cards[index].id;
+        uniqueId = event.target.idCard;
+        console.log(uniqueId);
       } else {
-        
         event.target.style.backgroundImage = `none`;
         event.target.cardOpened = false;
-
       }
     }
   }
