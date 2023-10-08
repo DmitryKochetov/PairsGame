@@ -18,6 +18,12 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  transform-style: preserve-3d;
+  transition: 0.4s ease-in-out;
+}
+
+.cardAnimated{
+  transform: rotateY(180deg);
 }
 
 .pairClosed {

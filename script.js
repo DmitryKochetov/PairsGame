@@ -53,6 +53,8 @@ for (let index = 0; index < 16; index++) {
 
   function cardClickHandler(event) {
     if (!event.target.matched) {
+      event.target.classList.add(`cardAnimated`);
+      
       if (!event.target.cardOpened) {
         if (openedCardsCounter >= 2) {
           for (let i = 0; i < 16; i++) {
@@ -77,15 +79,17 @@ for (let index = 0; index < 16; index++) {
 
             if (memoCards[i].cardID == firstOfPairID) {
               memoCards[i].removeEventListener(`click`, cardClickHandler);
-              memoCards[i].className = `pairClosed`;
+              memoCards[i].classList.add(`pairClosed`);
               memoCards[i].matched = true;
             }
           }
         }
         firstOfPairID = cards[index].id;
       } else {
+        
         event.target.style.backgroundImage = `none`;
         event.target.cardOpened = false;
+
       }
     }
   }
