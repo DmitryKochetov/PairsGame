@@ -39,7 +39,6 @@ let shuffledCards = shuffle(cards);
 let cont = document.querySelector(".container");
 let el;
 let firstOfPairID = -1;
-let secondOfPairID = -1;
 let openedCardsCounter = 0;
 let memoCards = [];
 let uniqueId = -1;
@@ -49,36 +48,36 @@ for (let index = 0; index < 16; index++) {
   cont.append(el);
   el.idCard = index;
   el.className = "card";
+  el.style.backgroundImage = `url(images/plate2.svg)`;
   el.addEventListener(`click`, cardClickHandler);
   memoCards.push(el);
 
   function cardClickHandler(event) {
     if (!event.target.matched) {
-      
-
       if (!event.target.cardOpened) {
+        openedCardsCounter++;
         event.target.classList.add(`cardAnimated`);
         if (openedCardsCounter >= 2) {
           for (let i = 0; i < 16; i++) {
             if (!memoCards[i].matched) {
-              memoCards[i].style.backgroundImage = `none`;
+              memoCards[i].style.backgroundImage = `url(images/plate2.svg)`;
               memoCards[i].cardOpened = false;
               memoCards[i].classList.remove("cardAnimated");
             }
           }
           firstOfPairID = -1;
-          secondOfPairID = -1;
           openedCardsCounter = 0;
         }
         console.log(memoCards);
         event.target.style.backgroundImage = `url(${cards[index].image})`;
         event.target.cardID = cards[index].id;
         event.target.cardOpened = true;
-        openedCardsCounter++;
+        // openedCardsCounter++;
         event.target.cardID = cards[index].id;
-        if ((cards[index].id === firstOfPairID) && (uniqueId != event.target.idCard)) {
-          // console.log(`win`);
-
+        if (
+          cards[index].id === firstOfPairID &&
+          uniqueId != event.target.idCard
+        ) {
           for (let i = 0; i < 16; i++) {
             if (memoCards[i].cardID == firstOfPairID) {
               memoCards[i].removeEventListener(`click`, cardClickHandler);
@@ -92,7 +91,7 @@ for (let index = 0; index < 16; index++) {
         uniqueId = event.target.idCard;
         console.log(uniqueId);
       } else {
-        event.target.style.backgroundImage = `none`;
+        event.target.style.backgroundImage = `url(images/plate2.svg)`;
         event.target.cardOpened = false;
       }
     }
